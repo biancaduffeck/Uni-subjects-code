@@ -19,5 +19,4 @@ def tower_of_hanoi(count, stacks=None, source=0, auxiliary=1, destination=2, mov
 
     return moves
 
-
-print(tower_of_hanoi(2))
+print(tower_of_hanoi(3))
