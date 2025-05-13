@@ -1,0 +1,36 @@
+import numpy as np
+import matplotlib.pyplot as plt
+import pandas as pd
+from sklearn import linear_model
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import mean_squared_error, r2_score
+
+data_pd = pd.read_csv("weight-height.csv",skiprows=1,names=["x","y"])
+
+x = np.array(data_pd[["x"]])
+y = np.array(data_pd[["y"]])
+
+xpd, xTest, ypd, yTest = train_test_split(x,y,test_size=0.2)
+
+regr = linear_model.LinearRegression()
+regr.fit(xpd, ypd)
+
+xval = xpd #maybe not very eficient
+yval = regr.predict(xval)
+
+print("==================================================================================")
+print("RMSE with the train values =", np.sqrt(mean_squared_error(yval,ypd))) #but allows me to put it directly here
+print("r2 with the train values =",r2_score(yval,ypd))#and here
+
+xvalTest=xTest
+yvalTest=regr.predict(xvalTest)
+
+print("RMSE with the test values =", np.sqrt(mean_squared_error(yTest,yvalTest))) #but allows me to put it directly here
+print("r2 with the test values =",r2_score(yTest,yvalTest))#and here
+print("==================================================================================")
+
+plt.scatter(xpd, ypd, color='blue')
+plt.scatter(xTest, yTest, color='green')
+plt.plot(xval,yval,color='red')
+
+plt.show()

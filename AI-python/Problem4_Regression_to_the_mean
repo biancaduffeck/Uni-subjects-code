@@ -1,0 +1,15 @@
+import numpy as np
+import matplotlib.pyplot as plt
+import pandas as pd
+from sklearn.linear_model import LinearRegression
+from sklearn.preprocessing import PolynomialFeatures
+
+nValues=[500, 1000, 2000, 5000, 10000, 15000, 20000, 50000, 100000]
+
+for n in nValues:
+    dices1=np.random.randint(1,7,n)
+    dices2=np.random.randint(1,7,n)
+    dices=dices1+dices2
+    h,h2 = np.histogram(dices,range(2,14))
+    plt.bar(h2[:-1],h/n)
+    plt.show()
